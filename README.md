@@ -2,6 +2,7 @@ SchemeUnitTest
 ==============
 
 Initiated at a Functional Programming Course at UiO, **INF2810**  
+This **is** an attempt at reinventing the wheel.  
 **Purpose:** learn more about Scheme, Functional Programming and Test Driven Development by developing SchemeUnitTest.
 
 ### Usage:
