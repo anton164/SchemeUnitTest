@@ -1,8 +1,8 @@
 SchemeUnitTest
 ==============
 
-Initiated at a Functional Programming Course at UiO, INF2810
-Purpose: learn more about Scheme, Functional Programming and Test Driven Development by developing SchemeUnitTest.
+Initiated at a Functional Programming Course at UiO, **INF2810**  
+**Purpose:** learn more about Scheme, Functional Programming and Test Driven Development by developing SchemeUnitTest.
 
 ### Usage:
 ```Scheme
