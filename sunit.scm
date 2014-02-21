@@ -1,26 +1,36 @@
+;; SchemeUnitTest
+;; Built-in list->string only takes a list of characters
+
 (define (tostring exp)
+  (define (list-->string) exp
+  "Not implemented")
   (cond ((string? exp) exp)
          ((number? exp)
          (number->string exp))
          ((list? exp)
-         (list->string exp))))
+         (list-->string exp))))
 
 (define (unit-test name predicate expected try)
   (if (predicate expected try)
       (string-append "Test '" name "' passed")
-      (string-append "Test '" name "' failed! " (tostring expected) 
-                              " not equal to " (tostring try) "")))
-
+      (string-append "Test '" name "' failed! Expected: " (tostring expected) 
+                              " Returned: " (tostring try) "")))
 
 (define (unit-tests . tests)
-  (if (null? tests)
-      "Tests passed" 
-   (apply unit-tests (cdr tests))))
-
-#! GOAL: Allow the following:
-(unit-tests
-   (list "Test 1" = 2 2)
-   (list "Test 2" < 3 4))
+  (define (apply-aux f g)
+    (lambda (x)
+      (f g x)))
+  (define (output test-results)
+    (if (not (null? test-results))
+        (begin
+          (display (string-append (car test-results) "\n"))
+          (output (cdr test-results)))))
+  (define (run-tests tests t-success t-fail)
+    (map (apply-aux apply unit-test) tests))
+  (begin
+    (output (run-tests tests 0 0))
+    (display "---------------------------\n")
+    (display "Test run complete.\n")))
 
 #| Preferrable output:
 Test run successful.
@@ -32,8 +42,4 @@ The following tests failed:
 ...
 ...
 |#
-
-(define tests
-  (list (list "fact2=2" = 2 (* 2 1))
-    (list "fact3=6" = 6 (* 3 2 1))))
 
