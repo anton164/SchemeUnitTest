@@ -2,13 +2,20 @@
 ;; Built-in list->string only takes a list of characters
 
 (define (tostring exp)
-  (define (list-->string) exp
-  "Not implemented")
+  (define (list-->string lst)
+    (define (aux lst)
+      (if (null? lst)
+          ")"
+          (string-append " " (tostring (car lst)) " " (aux (cdr lst)))))
+    (string-append "(" (aux lst)))
   (cond ((string? exp) exp)
          ((number? exp)
          (number->string exp))
          ((list? exp)
-         (list-->string exp))))
+         (list-->string exp))
+         ((procedure? exp)
+         "Procedure")
+         (else "Unknown type (quote?)")))
 
 (define (unit-test name predicate expected try)
   (if (predicate expected try)
