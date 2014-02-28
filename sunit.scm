@@ -26,7 +26,7 @@
           (display (string-append (car test-results) "\n"))
           (output (cdr test-results)))))
   (define (run-tests tests t-success t-fail)
-    (map (apply-aux apply unit-test) tests))
+    (map (lambda (x) (apply unit-test x)) tests))
   (begin
     (output (run-tests tests 0 0))
     (display "---------------------------\n")
