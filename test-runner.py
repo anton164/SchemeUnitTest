@@ -16,9 +16,15 @@ def last_update(source_paths):
       last_change = change
   return last_change
 
-test_file = sys.argv[1]
-wait_time = sys.argv[2]
-source = sys.argv[3:]
+try:
+  test_file = sys.argv[1]
+  wait_time = int(sys.argv[2])
+  source = sys.argv[3:]
+except IndexError, ValueError:
+  sys.exit("Usage: python test-runner.py test_file wait_time source (+source)\n"\
+    "test_file = File containing tests\n"\
+    "wait_time = Wait time between file change check)\nsource = File or folder containing code you wish to check for changes\n"\
+    "Example: python test-runner.py 'tests.scm' 5 'src/' 'othersrc/otherfile.scm'")
 
 last_change = last_update(source)
 
@@ -32,4 +38,4 @@ while (True):
     call(cmd, shell=True)
     last_change = check_change
 
-  time.sleep(int(wait_time))
+  time.sleep(wait_time)
