@@ -23,7 +23,7 @@
       (string-append "Test '" name "' failed! Expected: " (tostring expected) 
                               " Returned: " (tostring try) "")))
 
-(define (unit-tests . tests)
+(define (unit-tests name . tests)
   (define (apply-aux f g)
     (lambda (x)
       (f g x)))
@@ -35,9 +35,11 @@
   (define (run-tests tests t-success t-fail)
     (map (lambda (x) (apply unit-test x)) tests))
   (begin
+    (display (string-append "Running test-block: " name "\n"))
+    (display "---------------------------\n")
     (output (run-tests tests 0 0))
     (display "---------------------------\n")
-    (display "Test run complete.\n")))
+    (display "Test block complete.\n")))
 
 #| Preferrable output:
 Test run successful.

@@ -11,7 +11,7 @@
 (unit-test "str 3 -> str 3" string=? "3" (tostring "3"))
 
 ;; Multiple tests in a block
-(unit-tests
+(unit-tests "Testing block"
    (list "Test 1" = 2 2)
    (list "Test 2" < 3 4))
 
